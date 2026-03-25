@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="SODO Clothing - Shop stylish hats, shirts, hoodies, pants, and skirts for men and women.">
+<meta name="keywords" content="SODO, clothing, hats, shirts, hoodies, pants, skirts, shop, fashion, online store">
+<meta name="robots" content="index, follow">
+<title>SODO Clothing</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <a href="index.html" class="brand">SODO</a>
+  <nav class="nav-links">
+    <a href="shopnow.html">Shop Now</a>
+    <a href="#" id="cart-nav" onclick="toggleCart(); return false;">Cart(0)</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-overlay">
+    <h1>Өдөржин гоё бай, шөнийн од шиг гялалз!</h1>
+    <p>Таны загварын хүч, өөрийгөө илтгэ.</p>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="brand-statement">
+  <div class="scrolling-text">
+    <span>SODO STYLE</span>
+    <span class="outline-text">LIMITLESS</span>
+    <span>BE THE STAR</span>
+    <span class="outline-text">SODO STYLE</span>
+    <span>LIMITLESS</span>
+    <span class="outline-text">BE THE STAR</span>
+    <span>SODO STYLE</span>
+    <span class="outline-text">LIMITLESS</span>
+    <span>BE THE STAR</span>
+    <span class="outline-text">SODO STYLE</span>
+    <span>LIMITLESS</span>
+    <span class="outline-text">BE THE STAR</span>
+  </div>
+</div>
+
+
+
+  <div class="drag-container">
+    <div class="drag-track">
+      <div class="drag-item"><img src="harma1.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="harma3.jpg" data-worn="p2_worn.webp"></div>
+      <div class="drag-item"><img src="harpo1.webp" data-worn="p3_worn.webp"></div>
+      <div class="drag-item"><img src="harma2.webp" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="harpo2.jpg" data-worn="p2_worn.webp"></div>
+      <div class="drag-item"><img src="harpo3.jpg" data-worn="p3_worn.webp"></div>
+      <div class="drag-item"><img src="sandal.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="harpo4.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="harpo5.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagma1.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagma2.webp" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagpo1.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagpo2.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagpo3.webp" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagoims1.webp" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="tsagoims2.jpg" data-worn="p1_worn.webp"></div>
+      <div class="drag-item"><img src="saaralma1.jpg" data-worn="p1_worn.webp"></div>
+
+      </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 SODO. All rights reserved.</p>
+</footer>
+<script>
+// --- SHARED CART LOGIC ---
+let cart = JSON.parse(localStorage.getItem('SODO_CART')) || [];
+
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('active');
+}
+
+function updateCartUI() {
+    const navCart = document.getElementById('cart-nav');
+    if(navCart) navCart.innerText = `Cart(${cart.length})`;
+    
+    const list = document.getElementById('cartItemsList');
+    if(!list) return;
+
+    if (cart.length === 0) {
+        list.innerHTML = '<p style="color: #999;">Cart is empty.</p>';
+    } else {
+        list.innerHTML = cart.map((item, index) => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="">
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <strong>${item.price.toLocaleString()}₮</strong><br>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const totalDiv = document.getElementById('cartTotal');
+    if(totalDiv) totalDiv.innerText = `Total: ${total.toLocaleString()}₮`;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('SODO_CART', JSON.stringify(cart));
+    updateCartUI();
+}
+
+// Initialize UI on load
+document.addEventListener('DOMContentLoaded', updateCartUI);
+
+// ... Keep your existing Drag/Scroll animation code below here ...
+</script>
+</body>
+</html>

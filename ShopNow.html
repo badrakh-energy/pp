@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SODO Clothing - Shop stylish hats, shirts, hoodies, pants, and skirts for men and women.">
+<meta name="keywords" content="SODO, clothing, hats, shirts, hoodies, pants, skirts, shop, fashion, online store">
+<meta name="robots" content="index, follow">
+<title>Shop Now | SODO</title>
+<style>
+:root {
+    --primary: #000000;
+    --accent: #d2a679;
+    --bg: #ffffff;
+    --text: #1a1a1a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: 900;
+    text-decoration: none;
+    color: var(--primary);
+    letter-spacing: 2px;
+}
+
+.nav-links a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* SHOP HEADER */
+.shop-header {
+    padding: 80px 5% 40px;
+    text-align: center;
+}
+
+.shop-header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* PRODUCT GRID */
+.shop-container {
+    padding: 0 5% 100px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    position: relative;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.product-card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.img-wrapper {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+    background: #f9f9f9;
+    position: relative;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+/* ADD TO CART BUTTON */
+.add-to-cart {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--primary);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    font-weight: 700;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .add-to-cart {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.product-info {
+    padding: 15px 0;
+    text-align: left;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.product-info p {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* CART SIDEBAR */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 2000;
+    padding: 40px;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.active { right: 0; }
+
+.close-cart {
+    cursor: pointer;
+    font-size: 28px;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+#cartItemsList {
+    flex: 1;
+    margin-top: 20px;
+    overflow-y: auto;
+}
+
+#cartItemsList div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* CHECKOUT BUTTON */
+#checkoutBtn {
+    padding: 15px;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    padding: 50px;
+    text-align: center;
+    background: #f5f5f5;
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">SODO</a>
+    <nav class="nav-links">
+        <a href="#">Collection</a>
+        <a href="#" id="cart-trigger">Cart(0)</a>
+    </nav>
+</header>
+
+<section class="shop-header">
+    <h1>Shop All</h1>
+    <p>Өөрийн стилийг одоо ол.</p>
+</section>
+
+<div class="shop-container">
+    <div class="product-grid">
+        <!-- Example Product -->
+        <div class="product-card">
+            <div class="img-wrapper">
+                <img src="harma1.jpg" alt="Clothing">
+                <button class="add-to-cart" onclick="addToCart('SODO Hat', 45000)">Add to Cart</button>
+            </div>
+            <div class="product-info">
+                <h3>SODO Classic Hat-Men</h3>
+                <p>45,000₮</p>
+            </div>
+        </div>
+        <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harma3.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Urban Hat-Woman', 85000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>Urban Classic Hat-Woman</h3>
+                    <p>85,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="noholt.webp" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Sodo Brown Hat', 65000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>Sodo Brown Hat</h3>
+                    <p>69,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harma2.webp" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Essential Black Tee', 25000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>Essential Black Tee</h3>
+                    <p>20,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harpo1.webp" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Brown Trounie', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Brown Trounie</h3>
+                    <p>42,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harpo2.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic Shirts', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic Shirts</h3>
+                    <p>12,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harpo3.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic T-shirt(Cotton)', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic T-shirt(Cotton)</h3>
+                    <p>13,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harpo4.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic Trousers', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic Trousers</h3>
+                    <p>43,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="harpo5.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic T-shirt(black)', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic T-shirt(black)</h3>
+                    <p>25,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagma1.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Summer Hat', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Summer Hat</h3>
+                    <p>35,999₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagma2.webp" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic Hat', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic Hat</h3>
+                    <p>45,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagoims1.webp".jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('White socks-1', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO White socks-1</h3>
+                    <p>8,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagoims2.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('White socks', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO White socks</h3>
+                    <p>9,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagpo1.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Ritual T-shirt 2016', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Ritual T-shirt 2016</h3>
+                    <p>45,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsagpo2.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('White T-shirt', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO White T-shirt</h3>
+                    <p>45,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="tsenpo1.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic Podvolk', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic Podvolk</h3>
+                    <p>5,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="sandal.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('Classic Trousers', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Classic Trousers</h3>
+                    <p>25,000₮</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="img-wrapper">
+                    <img src="saaralma1.jpg" alt="Clothing">
+                    <button class="add-to-cart" onclick="addToCart('SSODO Grey Hat', 45000)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h3>SODO Grey Hat</h3>
+                    <p>15,000₮</p>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
+
+<div class="cart-sidebar" id="cartSidebar">
+    <span class="close-cart" onclick="toggleCart()">×</span>
+    <h2>Your Cart</h2>
+    <div id="cartItemsList"><p style="color:#999;">Cart is empty.</p></div>
+    <hr style="margin:20px 0; border-top:1px solid #eee;">
+    <button id="checkoutBtn" onclick="checkout()">CHECKOUT</button>
+</div>
+
+<footer>
+    <p>© 2026 SODO CLOTHING. All rights reserved.</p>
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('SODO_CART')) || [];
+const cartTrigger = document.getElementById('cart-trigger');
+const cartSidebar = document.getElementById('cartSidebar');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+function toggleCart() {
+    cartSidebar.classList.toggle('active');
+    updateCartUI();
+}
+
+cartTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleCart();
+});
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    localStorage.setItem('SODO_CART', JSON.stringify(cart));
+    updateCartUI();
+    alert(name + " added to cart!");
+}
+
+function updateCartUI() {
+    cartTrigger.innerText = `Cart(${cart.length})`;
+    const list = document.getElementById('cartItemsList');
+    if (cart.length === 0) {
+        list.innerHTML = '<p style="color:#999;">Cart is empty.</p>';
+    } else {
+        list.innerHTML = cart.map((item,index) => `
+            <div>
+                <span>${item.name}</span>
+                <span>${item.price.toLocaleString()}₮ <button onclick="removeFromCart(${index})" style="background:none;border:none;color:red;cursor:pointer;">x</button></span>
+            </div>
+        `).join('');
+    }
+}
+
+function removeFromCart(index) {
+    cart.splice(index,1);
+    localStorage.setItem('SODO_CART', JSON.stringify(cart));
+    updateCartUI();
+}
+
+// Checkout logic
+function checkout() {
+    if(cart.length === 0){
+        alert("Cart is empty!");
+        return;
+    }
+    alert(`Total: ${cart.reduce((sum,i)=>sum+i.price,0).toLocaleString()}₮\nProceeding to checkout...`);
+    cart = [];
+    localStorage.setItem('SODO_CART', JSON.stringify(cart));
+    updateCartUI();
+    toggleCart();
+}
+
+// Reveal animation
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('reveal');
+        }
+    });
+},{threshold:0.1});
+
+document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+
+// Initialize cart UI
+updateCartUI();
+</script>
+
+</body>
+</html>
